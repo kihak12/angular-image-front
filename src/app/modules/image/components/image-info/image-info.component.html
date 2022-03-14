@@ -1,0 +1,90 @@
+<div class="container">
+  <div *ngIf="image" class="flex">
+    <img src="{{image.url}}" alt="{{image.titre }}" class="image">
+
+    <div class="tab-container">
+      <mat-tab-group mat-align-tabs="center" dynamicHeight>
+        <mat-tab label="Informations">
+          <div class="flex-details">
+            <div class="flex-details-item">
+              Identifiant :
+              <h3>{{image.id}}</h3>
+            </div>
+          </div>
+          <div class="flex-details">
+            <div class="flex-details-item">
+              Image :
+              <h3>{{image.titre}}</h3>
+            </div>
+          </div>
+          <div class="flex-details">
+            <div class="flex-details-item">
+              Date de création :
+              <h3>{{image.creationDate | date: "dd MMMM yyyy"}}</h3>
+            </div>
+          </div>
+          <div class="flex-details">
+            <div class="flex-details-item">
+              Url de l'image :
+              <a href="{{image.url}}" target="_blank">{{image.url}}</a>
+            </div>
+          </div>
+          <div class="flex-details">
+            <div class="flex-details-item">
+              Taille de l'image :
+              <h3>{{image.size}} Ko</h3>
+            </div>
+          </div>
+          <div class="flex-details">
+            <div class="flex-details-item">
+              Largeur x Hauteur :
+              <h3>{{image.width}}x{{image.height}}<span>(px)</span></h3>
+            </div>
+          </div>
+        </mat-tab>
+        <mat-tab label="Modifications">
+          <div class="flex-modifs">
+            Redimentionner :
+            <div class="modif-head">
+              <form [formGroup]="imageForm" class="form-container">
+                <div>
+                  <mat-form-field appearance="legacy">
+                    <mat-label>Largeur</mat-label>
+                    <input formControlName="width" required matInput type="number" (change)="adaptRatio('width')" placeholder="Ex. 480" min="1">
+                    <span matSuffix>px</span>
+                  </mat-form-field>
+                  <mat-form-field appearance="legacy">
+                    <mat-label>Hauteur</mat-label>
+                    <input formControlName="height" required matInput type="number" (change)="adaptRatio('height')" placeholder="Ex. 240" min="1">
+                    <span matSuffix>px</span>
+                  </mat-form-field>
+                  <mat-form-field appearance="legacy">
+                    <mat-label>Titre</mat-label>
+                    <input formControlName="titre" required matInput type="text" placeholder="Ex. Arbre">
+                  </mat-form-field>
+                </div>
+                <div class="flex-check">
+                  <p><mat-checkbox color="primary" formControlName="ratio">Concerver le ratio de l'image</mat-checkbox></p>
+                  <mat-card-actions>
+                    <button mat-raised-button color="primary" (click)="sendForm(image.id)">Submit</button>
+                  </mat-card-actions>
+                </div>
+              </form>
+              
+
+            </div>
+          </div>
+          <div class="flex-details">
+            <div class="flex-details-item">
+              Supprimer cette image :
+              <button mat-raised-button color="warn" (click)="confirmDelete(image.id)">Supprimer</button>
+            </div>
+          </div>
+        </mat-tab>
+      </mat-tab-group>
+    </div>
+  </div>
+  <div *ngIf="!image" class="flex">
+    <h2>Nothing found</h2>
+  </div>
+</div>

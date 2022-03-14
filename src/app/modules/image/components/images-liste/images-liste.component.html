@@ -1,0 +1,32 @@
+<div class="content">
+    <h2>Liste des Images :</h2>
+    
+    <div class="grid">
+        <div class="item" *ngFor="let image of images" (click)="onSelect(image.id)">
+            <div class="flex">
+                <div class="texte">
+                    <div class="img-content">
+                        <img src="{{image.url}}" alt="{{image.titre}}">
+                    </div>
+                    <div>
+                        <h2>{{image.titre}}</h2>
+                    </div>
+                    <div>
+                        <span>Dimension : </span>
+                        <span>{{image.width}}x{{image.height}}<span style="font-size: 10px;">(px)</span></span>
+                    </div>
+                    <div>
+                        <span>Taille de l'image : </span>
+                        <span>{{image.size}} Ko</span>
+                    </div>
+                    <div>
+                        <span>Date de création : </span>
+                        <span>{{image.creationDate | date: "dd MMMM yyyy"}}</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+

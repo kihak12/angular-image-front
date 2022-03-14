@@ -1,0 +1,45 @@
+<div class="container">
+    <div class="flex">
+        <div class="tab-container">
+            <h2>Upload d'image</h2>
+            <mat-tab-group mat-align-tabs="center" dynamicHeight>
+                <mat-tab label="Via fichier">
+                    <form [formGroup]="imageFormFile">
+                        <div class="flex-details">
+                            <div class="flex-details-item">
+                                Titre de l'image :
+                                <mat-form-field appearance="legacy">
+                                    <mat-label>Titre</mat-label>
+                                    <input matInput type="text" formControlName="titre" placeholder="Ex. Arbre">
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="flex-details">
+                            <div class="flex-details-item">
+                                Upload du fichier :
+                                <mat-form-field appearance="legacy">
+                                    <mat-label>Url</mat-label>
+                                    <ngx-mat-file-input matInput (change)="testFile($event)" formControlName="image" accept=".png, .jpg, .jpeg"></ngx-mat-file-input>
+                                    <mat-icon matSuffix>folder</mat-icon>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="flex-details">
+                            <div class="flex-details-item">
+                                <button mat-raised-button color="primary" (click)="submitData()" type="submit">Uploader</button>
+                            </div>
+                        </div>
+                    </form>
+                </mat-tab>
+            </mat-tab-group>
+        </div>
+        <div *ngIf="imgFile" class="card">
+            <div class="card-container">
+                <div class="image-vue-head">
+                    <h2>Prévue de l'image :</h2>
+                    <img [src]="imgFile">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
